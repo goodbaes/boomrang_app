@@ -4,6 +4,7 @@ ThemeData _lightTheme() {
   final baseTheme = AppTheme._baseTheme;
   return baseTheme.copyWith(
     brightness: Brightness.light,
+    focusColor: Colors.greenAccent,
     scaffoldBackgroundColor: Colors.white,
     textTheme: baseTheme.textTheme.apply(
       displayColor: Colors.black,

@@ -1,11 +1,10 @@
-import 'package:boomerang/common/custiom_widgets/custom_widgets.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import 'home_controller.dart';
+import '../controllers/home_controller.dart';
 
-class HomePage extends GetView<HomeController> {
+class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,8 +13,9 @@ class HomePage extends GetView<HomeController> {
         centerTitle: true,
       ),
       body: Center(
-        child: DefaultButton(
-          text: 'Hello',
+        child: Text(
+          controller.text,
+          style: TextStyle(fontSize: 20),
         ),
       ),
     );

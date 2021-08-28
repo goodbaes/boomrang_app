@@ -1,6 +1,5 @@
+import 'package:boomerang/app/modules/home/controllers/home_controller.dart';
 import 'package:get/get.dart';
-
-import 'home_controller.dart';
 
 class HomeBinding extends Bindings {
   @override
