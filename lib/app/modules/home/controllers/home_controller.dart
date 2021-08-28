@@ -7,10 +7,6 @@ class HomeController extends GetxController {
   String text = '';
   @override
   void onReady() {
-    // print('qwe');
-    // print(_pref.userPhone.val);
-    Get.snackbar('title', 'message');
-    if (_pref.userPhone.val == '') Get.offAndToNamed(Routes.LOGIN);
     super.onReady();
   }
 }

@@ -71,6 +71,10 @@ class _PhoneLogin extends StatelessWidget {
   }
 
   Widget _buildCodeField() {
+    final mask = MaskTextInputFormatter(
+      mask: '######',
+      filter: {"#": RegExp(r'[0-9]')},
+    );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -79,6 +83,7 @@ class _PhoneLogin extends StatelessWidget {
             autofocus: true,
             keyboardType: TextInputType.number,
             inputFormatters: [
+              mask,
               FilteringTextInputFormatter.digitsOnly,
             ],
             maxLength: 18,

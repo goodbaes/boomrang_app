@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:boomerang/common/theme/app_colors.dart';
@@ -6,6 +7,7 @@ import 'package:boomerang/common/theme/app_colors.dart';
 const _minHeight = 50.0;
 
 class DefaultButton extends StatelessWidget {
+  final IconData? icon;
   final String text;
   final VoidCallback? onTap;
   final EdgeInsets? margin;
@@ -13,12 +15,14 @@ class DefaultButton extends StatelessWidget {
   final bool expand;
   final Rx<bool>? isProgress;
   final double? minHeight;
-
+  final Colors? color;
   const DefaultButton({
     Key? key,
     required this.text,
     this.onTap,
     this.margin,
+    this.icon,
+    this.color,
     this.paddingText,
     this.expand = true,
   })  : isProgress = null,
@@ -30,7 +34,9 @@ class DefaultButton extends StatelessWidget {
     required this.text,
     this.onTap,
     this.margin,
+    this.icon,
     this.paddingText,
+    this.color,
     this.expand = true,
     required this.isProgress,
     this.minHeight,
@@ -39,6 +45,7 @@ class DefaultButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var style = Theme.of(context).elevatedButtonTheme.style;
+
     final button = Container(
       constraints: BoxConstraints(minWidth: expand ? double.infinity : 0),
       margin: margin,
@@ -46,7 +53,16 @@ class DefaultButton extends StatelessWidget {
         onPressed: onTap,
         child: Padding(
           padding: paddingText ?? EdgeInsets.zero,
-          child: Text(text),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (icon != null) Icon(icon),
+              Text(
+                text,
+                style: Get.theme.textTheme.bodyText1,
+              ),
+            ],
+          ),
         ),
         style: style,
       ),

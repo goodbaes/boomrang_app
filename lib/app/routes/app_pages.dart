@@ -2,8 +2,6 @@ import 'package:get/get.dart';
 
 import 'package:boomerang/app/modules/app-page/bindings/app_page_binding.dart';
 import 'package:boomerang/app/modules/app-page/views/app_page_view.dart';
-import 'package:boomerang/app/modules/auth/bindings/auth_binding.dart';
-import 'package:boomerang/app/modules/auth/views/auth_view.dart';
 import 'package:boomerang/app/modules/home/bindings/home_binding.dart';
 import 'package:boomerang/app/modules/home/views/home_view.dart';
 import 'package:boomerang/app/modules/login/bindings/login_binding.dart';
@@ -26,11 +24,6 @@ class AppPages {
       name: _Paths.HOME,
       page: () => HomeView(),
       binding: HomeBinding(),
-    ),
-    GetPage(
-      name: _Paths.AUTH,
-      page: () => AuthView(),
-      binding: AuthBinding(),
     ),
     GetPage(
       name: _Paths.LOGIN,

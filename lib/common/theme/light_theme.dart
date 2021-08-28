@@ -14,6 +14,8 @@ ThemeData _lightTheme() {
       cursorColor: Colors.black,
     ),
     appBarTheme: AppBarTheme(
+      elevation: 0,
+      backgroundColor: Colors.white,
       iconTheme: IconThemeData(color: Colors.black),
       actionsIconTheme: IconThemeData(color: Colors.black),
     ),
@@ -36,10 +38,12 @@ ThemeData _lightTheme() {
       backgroundColor: Colors.white,
     ),
     hintColor: Colors.black26,
+    buttonColor: AppColors.lightGreenButton,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: baseTheme.elevatedButtonTheme.style?.copyWith(
         backgroundColor: _elevatedButtonBackgroundColor(
-          pressed: AppColors.orangeButtonPressed,
+          other: AppColors.lightGreenButton,
+          pressed: AppColors.lightGreenButtonDisable,
         ),
       ),
     ),

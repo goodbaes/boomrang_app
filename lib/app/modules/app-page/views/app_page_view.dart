@@ -14,7 +14,7 @@ class AppPageView extends GetView<AppPageController> {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Бумеранг",
-      initialRoute: Routes.HOME,
+      initialRoute: controller.initialRoute(),
       getPages: AppPages.routes,
       themeMode: ThemeMode.light,
       theme: AppTheme.lightTheme,

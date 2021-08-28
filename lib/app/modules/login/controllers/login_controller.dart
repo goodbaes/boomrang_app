@@ -12,7 +12,7 @@ class LoginController extends GetxController {
   }
 
   void enterCode() {
-    Get.offAndToNamed(Routes.HOME);
+    if (codeReady.value) Get.offAndToNamed(Routes.HOME);
   }
 
   void sendAgain() {
