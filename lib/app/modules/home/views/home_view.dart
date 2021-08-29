@@ -1,5 +1,6 @@
 import 'package:boomerang/common/custiom_widgets/custom_widgets.dart';
 import 'package:boomerang/common/custiom_widgets/src/add_address_sheet.dart';
+import 'package:boomerang/common/custiom_widgets/src/cafe_card_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -27,14 +28,32 @@ class HomeView extends GetView<HomeController> {
         centerTitle: true,
       ),
       body: Center(
-        child: ListView(
-          children: [_buildTitle(), buildListViewHeader],
+        child: Column(
+          children: [
+            _buildTitle(),
+            _buildListViewHeader(),
+            _buildListCafeCard()
+          ],
         ),
       ),
     );
   }
 
-  Padding _buildTitle() {
+  Widget _buildListCafeCard() {
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: ListView.builder(
+          itemCount: 2,
+          itemBuilder: (context, index) {
+            return CafeCardWidget(controller.cafeList[index]);
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTitle() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Text(
@@ -44,14 +63,17 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  Widget get buildListViewHeader {
-    return Container(
-      height: 40,
-      child: ListView.builder(
-        itemCount: controller.shopList.length,
-        controller: controller.headerScrollController,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) => buildPaddingHeaderCard(index),
+  Widget _buildListViewHeader() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Container(
+        height: 40,
+        child: ListView.builder(
+          itemCount: controller.shopList.length,
+          controller: controller.headerScrollController,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) => buildPaddingHeaderCard(index),
+        ),
       ),
     );
   }

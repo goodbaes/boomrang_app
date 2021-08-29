@@ -20,6 +20,8 @@ ThemeData _lightTheme() {
       iconTheme: IconThemeData(color: Colors.black),
       actionsIconTheme: IconThemeData(color: Colors.black),
     ),
+    chipTheme:
+        baseTheme.chipTheme.copyWith(backgroundColor: AppColors.lightGrayIcon),
     dividerColor: AppColors.lightGrayIcon,
     iconTheme: IconThemeData(color: AppColors.lightGrayIcon),
     shadowColor: Colors.black,

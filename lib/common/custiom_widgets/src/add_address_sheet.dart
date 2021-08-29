@@ -1,4 +1,4 @@
-import 'package:boomerang/data/src/dto/src/address_list_model.dart';
+import 'package:boomerang/data/src/dto/src/address_list_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
