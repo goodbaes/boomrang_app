@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 
+import '../custom_widgets.dart';
+
 const String p =
     'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
 
@@ -17,17 +19,20 @@ class CafeCardWidget extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildImg(),
-          _buildName(),
-          _buildChips(),
-          SizedBox(
-            height: 16,
-          )
-        ],
+    return GestureDetector(
+      onTap: () => onTap.call(),
+      child: Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildImg(),
+            _buildName(),
+            _buildChips(),
+            SizedBox(
+              height: 16,
+            )
+          ],
+        ),
       ),
     );
   }
@@ -53,15 +58,20 @@ class CafeCardWidget extends StatelessWidget {
 
   Container _buildImg() {
     return Container(
+      width: Get.width,
       height: 200,
       child: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
+              width: Get.width,
+              decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.0),
-                image: DecorationImage(
-                    image: NetworkImage(data.img ?? p), fit: BoxFit.cover)),
-          ),
+              ),
+              child: Flexible(
+                child: CustomCachedNetworkImage(
+                  url: data.img ?? '',
+                ),
+              )),
           Positioned(
             top: 10,
             right: 10,
