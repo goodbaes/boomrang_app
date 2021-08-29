@@ -1,11 +1,11 @@
+import 'package:boomerang/data/src/dto/src/cafe_model.dart';
 import 'package:get/get.dart';
 
 class CafeDetailController extends GetxController {
-  //TODO: Implement CafeDetailController
-
-  final count = 0.obs;
+  late final CafeModel data;
   @override
   void onInit() {
+    data = Get.arguments;
     super.onInit();
   }
 
@@ -16,5 +16,4 @@ class CafeDetailController extends GetxController {
 
   @override
   void onClose() {}
-  void increment() => count.value++;
 }

@@ -17,6 +17,11 @@ class HomeController extends GetxController {
     CafeModel('Лагманная', 20, 4.2, 1, false, '', p, '3')
   ].obs;
   String text = '';
+
+  void goToDetail(index) {
+    Get.toNamed(Routes.CAFE_DETAIL, arguments: cafeList[index]);
+  }
+
   @override
   void onReady() {
     super.onReady();

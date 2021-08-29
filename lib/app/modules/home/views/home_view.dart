@@ -70,9 +70,7 @@ class HomeView extends GetView<HomeController> {
           itemCount: controller.cafeList.length,
           itemBuilder: (context, index) {
             return CafeCardWidget(
-                controller.cafeList[index],
-                () => Get.toNamed(Routes.CAFE_DETAIL,
-                    arguments: controller.cafeList[index]));
+                controller.cafeList[index], () => controller.goToDetail(index));
           },
         ),
       ),
