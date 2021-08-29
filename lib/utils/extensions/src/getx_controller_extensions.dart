@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:boomerang/common/localization/app_localization.dart';
 import 'package:boomerang/domain/domain.dart';
 import '../../constants.dart';
 import 'list_extensions.dart';
@@ -16,13 +15,6 @@ extension ExtensionsGetxController on GetxController {
         duration: kDurationErrorSnackBar,
       ));
     }
-  }
-
-  void handleUnknownError(dynamic error) {
-    Get.showSnackbar(GetBar(
-      message: ALKeys.unknownError.tr,
-      duration: kDurationErrorSnackBar,
-    ));
   }
 
   void handleErrorForKeys(
