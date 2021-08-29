@@ -1,5 +1,6 @@
 class CafeModel {
-  final img;
+  final String id;
+  String? img;
   final String name;
   final int deliveryTime;
   final double rating;
@@ -7,5 +8,5 @@ class CafeModel {
   final bool isFavor;
   final String category;
   CafeModel(this.name, this.deliveryTime, this.rating, this.km, this.isFavor,
-      this.category, this.img);
+      this.category, this.img, this.id);
 }

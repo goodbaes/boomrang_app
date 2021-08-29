@@ -11,8 +11,10 @@ class HomeController extends GetxController {
   final shopList = ['', 'Все', 'Китайка', 'KFC'];
   final headerScrollController = ScrollController();
   final cafeList = [
-    CafeModel('Social Pizza', 30, 4.4, 2, true, '', p),
-    CafeModel('KFC', 20, 4.2, 1, false, '', p)
+    CafeModel('Social Pizz', 30, 4.4, 2, true, '', p, '0'),
+    CafeModel('KFC', 20, 4.2, 1, false, '', p, '1'),
+    CafeModel('Pizza', 30, 4.4, 2, true, '', p, '2'),
+    CafeModel('Лагманная', 20, 4.2, 1, false, '', p, '3')
   ].obs;
   String text = '';
   @override

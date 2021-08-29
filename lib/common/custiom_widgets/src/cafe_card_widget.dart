@@ -2,24 +2,37 @@ import 'package:boomerang/common/theme/app_colors.dart';
 import 'package:boomerang/data/src/dto/src/cafe_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 
 const String p =
     'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
 
 class CafeCardWidget extends StatelessWidget {
   final CafeModel data;
-  const CafeCardWidget(this.data, {Key? key}) : super(key: key);
+  final Callback onTap;
+  const CafeCardWidget(
+    this.data,
+    this.onTap, {
+    Key? key,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [_buildImg(), _buildName(), _buildChips()],
+        children: [
+          _buildImg(),
+          _buildName(),
+          _buildChips(),
+          SizedBox(
+            height: 16,
+          )
+        ],
       ),
     );
   }
 
-  Row _buildChips() => Row(
+  Widget _buildChips() => Row(
         children: [
           _buildChipWithIcon(
               Icon(Icons.car_repair, color: Get.theme.accentColor),
@@ -33,11 +46,7 @@ class CafeCardWidget extends StatelessWidget {
       );
 
   Widget _buildChipWithIcon(icon, text) {
-    return Chip(
-      label: Row(
-        children: [icon, Text(text)],
-      ),
-    ).paddingOnly(right: 8);
+    return ChipInfoWidget(icon, text).paddingOnly(right: 8);
   }
 
   Text _buildName() => Text(data.name, style: Get.theme.textTheme.headline4);
@@ -85,6 +94,23 @@ class CafeCardWidget extends StatelessWidget {
         padding: EdgeInsets.all(20),
         primary: Colors.transparent,
         onPrimary: Colors.red,
+      ),
+    );
+  }
+}
+
+class ChipInfoWidget extends StatelessWidget {
+  final Icon icon;
+  final String text;
+  const ChipInfoWidget(
+    this.icon,
+    this.text,
+  );
+  @override
+  Widget build(BuildContext context) {
+    return Chip(
+      label: Row(
+        children: [icon, Text(text)],
       ),
     );
   }

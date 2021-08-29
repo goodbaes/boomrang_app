@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import 'package:boomerang/app/modules/app-page/bindings/app_page_binding.dart';
 import 'package:boomerang/app/modules/app-page/views/app_page_view.dart';
+import 'package:boomerang/app/modules/cafe-detail/bindings/cafe_detail_binding.dart';
+import 'package:boomerang/app/modules/cafe-detail/views/cafe_detail_view.dart';
 import 'package:boomerang/app/modules/home/bindings/home_binding.dart';
 import 'package:boomerang/app/modules/home/views/home_view.dart';
 import 'package:boomerang/app/modules/login/bindings/login_binding.dart';
@@ -29,6 +31,11 @@ class AppPages {
       name: _Paths.LOGIN,
       page: () => LoginView(),
       binding: LoginBinding(),
+    ),
+    GetPage(
+      name: _Paths.CAFE_DETAIL,
+      page: () => CafeDetailView(),
+      binding: CafeDetailBinding(),
     ),
   ];
 }

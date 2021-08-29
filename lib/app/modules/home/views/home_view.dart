@@ -1,3 +1,4 @@
+import 'package:boomerang/app/routes/app_pages.dart';
 import 'package:boomerang/common/custiom_widgets/custom_widgets.dart';
 import 'package:boomerang/common/custiom_widgets/src/add_address_sheet.dart';
 import 'package:boomerang/common/custiom_widgets/src/cafe_card_widget.dart';
@@ -11,30 +12,52 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(onPressed: () {}, icon: Icon(Icons.menu_rounded)),
-        actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.search_rounded))
-        ],
-        title: SizedBox(
-          child: CurrentAddressButton(
-            icon: Icons.gps_fixed,
-            text: 'Введите ваш адрес',
-            onTap: () {
-              bottomSheet(AddAddressWidget([]));
-            },
+      appBar: _buildAppbar(),
+      body: _buildNested(
+        Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [_buildListViewHeader(), _buildListCafeCard()],
           ),
         ),
-        centerTitle: true,
       ),
-      body: Center(
-        child: Column(
-          children: [
-            _buildTitle(),
-            _buildListViewHeader(),
-            _buildListCafeCard()
-          ],
+    );
+  }
+
+  AppBar _buildAppbar() {
+    return AppBar(
+      leading: IconButton(onPressed: () {}, icon: Icon(Icons.menu_rounded)),
+      actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search_rounded))],
+      title: SizedBox(
+        child: CurrentAddressButton(
+          icon: Icons.gps_fixed,
+          text: 'Введите ваш адрес',
+          onTap: () {
+            bottomSheet(AddAddressWidget([]));
+          },
         ),
+      ),
+      centerTitle: true,
+    );
+  }
+
+  NestedScrollView _buildNested(child) {
+    return NestedScrollView(
+      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+        return <Widget>[
+          SliverAppBar(
+            floating: true,
+            pinned: false,
+            flexibleSpace: FlexibleSpaceBar(
+              centerTitle: true,
+              title: Container(
+                  alignment: Alignment.centerLeft, child: _buildTitle()),
+            ),
+          ),
+        ];
+      },
+      body: Center(
+        child: child,
       ),
     );
   }
@@ -44,9 +67,12 @@ class HomeView extends GetView<HomeController> {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: ListView.builder(
-          itemCount: 2,
+          itemCount: controller.cafeList.length,
           itemBuilder: (context, index) {
-            return CafeCardWidget(controller.cafeList[index]);
+            return CafeCardWidget(
+                controller.cafeList[index],
+                () => Get.toNamed(Routes.CAFE_DETAIL,
+                    arguments: controller.cafeList[index]));
           },
         ),
       ),
