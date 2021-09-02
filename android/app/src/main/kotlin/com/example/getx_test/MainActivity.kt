@@ -1,4 +1,5 @@
-package com.example.getx_test
+package com.example.boomerang
+// TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
 
 import io.flutter.embedding.android.FlutterActivity
 

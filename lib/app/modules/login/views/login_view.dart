@@ -12,17 +12,20 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        padding: EdgeInsets.all(16),
-        children: [
-          SizedBox(height: 16),
-          _buildDescription(),
-          SizedBox(height: 16),
-          _PhoneLogin(
-            onLogin: (String value) {},
-            loginController: controller,
-          ),
-        ],
+      body: Center(
+        child: ListView(
+          shrinkWrap: true,
+          padding: EdgeInsets.all(16),
+          children: [
+            SizedBox(height: 16),
+            _buildDescription(),
+            SizedBox(height: 16),
+            _PhoneLogin(
+              onLogin: (String value) {},
+              loginController: controller,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -110,11 +113,13 @@ class _PhoneLogin extends StatelessWidget {
         ),
         Column(
           children: [
-            FlatButton(
+            TextButton(
               onPressed: () {
                 loginController.sendAgain();
               },
-              textColor: Get.theme.hintColor,
+              style: ButtonStyle(
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Get.theme.hintColor)),
               child: Center(
                 child: Text(LocaleKeys.login_skip.tr),
               ),
