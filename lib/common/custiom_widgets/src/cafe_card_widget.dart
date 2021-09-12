@@ -1,5 +1,7 @@
+import 'package:boomerang/app/modules/favorites/controllers/favorites_controller.dart';
 import 'package:boomerang/common/theme/app_colors.dart';
 import 'package:boomerang/data/src/dto/src/cafe_model.dart';
+import 'package:boomerang/data/src/dto/src/restaurant_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
@@ -10,13 +12,16 @@ const String p =
     'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
 
 class CafeCardWidget extends StatelessWidget {
-  final CafeModel data;
+  final RestaurantModel data;
   final Callback onTap;
+
   const CafeCardWidget(
-    this.data,
-    this.onTap, {
-    Key? key,
-  }) : super(key: key);
+    {
+      required this.onTap,
+      required this.data,
+      Key? key
+    }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -41,12 +46,12 @@ class CafeCardWidget extends StatelessWidget {
         children: [
           _buildChipWithIcon(
               Icon(Icons.car_repair, color: Get.theme.accentColor),
-              data.deliveryTime.toString() + ' мин.'),
+              '60 мин.'),
           _buildChipWithIcon(Icon(Icons.star, color: AppColors.secondaryYellow),
               (data.rating == 0 ? 'N/R' : data.rating).toString()),
           _buildChipWithIcon(
               Icon(Icons.track_changes, color: AppColors.secondaryBlack),
-              data.km.toString() + ' km.'),
+              '3 km.'),
         ],
       );
 
@@ -54,7 +59,15 @@ class CafeCardWidget extends StatelessWidget {
     return ChipInfoWidget(icon, text).paddingOnly(right: 8);
   }
 
-  Text _buildName() => Text(data.name, style: Get.theme.textTheme.headline4);
+  Widget _buildName(){
+    return Container(
+      margin: EdgeInsets.fromLTRB(0, 8, 0, 5),
+      child: Text(
+        data.name, 
+        style: Get.theme.textTheme.headline2
+      )
+    );
+  }
 
   Container _buildImg() {
     return Container(
@@ -63,48 +76,42 @@ class CafeCardWidget extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-              width: Get.width,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              child: Flexible(
-                child: CustomCachedNetworkImage(
-                  url: data.img ?? '',
-                ),
-              )),
+            width: Get.width,
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              child: CustomCachedNetworkImage(
+                url: data.preview,
+              )
+            )
+          ),
           Positioned(
             top: 10,
             right: 10,
-            child: data.isFavor ? _favorButton() : _notFavorButton(),
+            child: _favorButton(),
           )
         ],
       ),
     );
   }
 
-  ElevatedButton _notFavorButton() {
-    return ElevatedButton(
-      onPressed: () {},
-      child: Icon(Icons.favorite_border_rounded, color: Colors.white),
-      style: ElevatedButton.styleFrom(
-        shape: CircleBorder(),
-        padding: EdgeInsets.all(20),
-        primary: Colors.transparent,
-        onPrimary: Colors.red,
-      ),
-    );
-  }
-
-  ElevatedButton _favorButton() {
-    return ElevatedButton(
-      onPressed: () {},
-      child: Icon(Icons.favorite, color: Colors.red),
-      style: ElevatedButton.styleFrom(
-        shape: CircleBorder(),
-        padding: EdgeInsets.all(20),
-        primary: Colors.transparent,
-        onPrimary: Colors.red,
-      ),
+  Widget _favorButton() {
+    return GetBuilder<FavoritesController>(
+      builder: (favoritesController) {
+        return ElevatedButton(
+          onPressed: () => favoritesController.toggleFavorite(data.id),
+          child: Obx(()=>
+            favoritesController.favorites.contains(data.id)
+              ? Icon(Icons.favorite, color: Colors.red)
+              : Icon(Icons.favorite_border_rounded, color: Colors.white),
+          ),
+          style: ElevatedButton.styleFrom(
+            shape: CircleBorder(),
+            padding: EdgeInsets.all(20),
+            primary: Colors.transparent,
+            onPrimary: Colors.red,
+          ),
+        );
+      },
     );
   }
 }

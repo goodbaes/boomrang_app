@@ -44,7 +44,7 @@ class   DefaultButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var style = Theme.of(context).elevatedButtonTheme.style;
+    var style = Get.theme.elevatedButtonTheme.style;
 
     final button = Container(
       constraints: BoxConstraints(minWidth: expand ? double.infinity : 0),
@@ -59,11 +59,13 @@ class   DefaultButton extends StatelessWidget {
               if (icon != null)
                 Icon(
                   icon,
-                  color: Get.theme.textTheme.bodyText1!.color,
+                  color: AppColors.blackText,
                 ),
               Text(
                 ' ' + text,
-                style: Get.theme.textTheme.bodyText1,
+                style: Get.theme.textTheme.bodyText1!.copyWith(
+                  color: AppColors.blackText,
+                ),
               ),
             ],
           ),
@@ -80,7 +82,7 @@ class   DefaultButton extends StatelessWidget {
         child: Obx(
           () => isProgress!.value
               ? CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation(AppColors.mainBlue),
+                  valueColor: AlwaysStoppedAnimation(AppColors.lightGreen),
                 )
               : button,
         ),

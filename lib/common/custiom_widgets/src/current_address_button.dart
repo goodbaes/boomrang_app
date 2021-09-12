@@ -61,7 +61,7 @@ class CurrentAddressButton extends StatelessWidget {
         child: Obx(
           () => isProgress!.value
               ? CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation(AppColors.mainBlue),
+                  valueColor: AlwaysStoppedAnimation(AppColors.lightGreen),
                 )
               : button,
         ),

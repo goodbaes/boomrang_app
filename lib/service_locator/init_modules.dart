@@ -1,5 +1,5 @@
 import 'package:boomerang/app/modules/app-page/controllers/app_page_controller.dart';
-import 'package:boomerang/app/modules/home/controllers/home_controller.dart';
+import 'package:boomerang/app/modules/favorites/controllers/favorites_controller.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';

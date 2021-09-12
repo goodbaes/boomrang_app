@@ -1,5 +1,6 @@
 import 'package:boomerang/app/modules/login/controllers/login_controller.dart';
 import 'package:boomerang/common/custiom_widgets/custom_widgets.dart';
+import 'package:boomerang/common/theme/app_colors.dart';
 import 'package:boomerang/generated/locales.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,6 +13,7 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.darkPurple,
       body: Center(
         child: ListView(
           shrinkWrap: true,
@@ -47,11 +49,11 @@ class _PhoneLogin extends StatelessWidget {
   _PhoneLogin({required this.onLogin, required this.loginController});
 
   _border() => OutlineInputBorder(
-      borderSide: BorderSide(color: Get.theme.focusColor.withOpacity(1)));
+      borderSide: BorderSide(color: Colors.white));
   _focusedBorder() => OutlineInputBorder(
-      borderSide: BorderSide(color: Get.theme.focusColor.withOpacity(1)));
+      borderSide: BorderSide(color: AppColors.lightGreen));
   _enabledBorder() => OutlineInputBorder(
-      borderSide: BorderSide(color: Get.theme.focusColor.withOpacity(1)));
+      borderSide: BorderSide(color: Colors.white));
   _contentPadding() =>
       EdgeInsets.only(bottom: 12, top: 12, left: 16, right: 16);
 
@@ -161,14 +163,16 @@ class _PhoneLogin extends StatelessWidget {
             },
             decoration: InputDecoration(
               counterText: '',
-              labelStyle: Get.textTheme.subtitle1,
+              labelStyle: Get.textTheme.subtitle1!.copyWith(
+                color: Colors.white
+              ),
               // hintStyle: _hintStyle(),
               border: _border(),
               focusedBorder: _focusedBorder(),
               enabledBorder: _enabledBorder(),
               contentPadding: _contentPadding(),
               hintText: '+996 000 000 000',
-              labelText: LocaleKeys.login_enter_phone_number.tr,
+              // labelText: LocaleKeys.login_enter_phone_number.tr,
             ),
           ),
         ),

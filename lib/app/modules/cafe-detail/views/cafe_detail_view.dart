@@ -17,30 +17,28 @@ class CafeDetailView extends GetView<CafeDetailController> {
             fit: StackFit.expand,
             children: [
               _buildTopContent(),
-              Expanded(
-                child: Column(
-                  children: [
-                    Flexible(
-                      fit: FlexFit.tight,
-                      child: SizedBox(child: Text('asd')),
-                      flex: 37,
-                    ),
-                    Flexible(
-                        flex: 63,
-                        child: Stack(
-                          fit: StackFit.expand,
-                          children: [
-                            Material(
-                              color: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16.0),
-                              ),
+              Column(
+                children: [
+                  Flexible(
+                    fit: FlexFit.tight,
+                    child: SizedBox(child: Text('asd')),
+                    flex: 37,
+                  ),
+                  Flexible(
+                      flex: 63,
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          Material(
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16.0),
                             ),
-                          ],
-                        ))
-                  ],
-                ),
-              )
+                          ),
+                        ],
+                      ))
+                ],
+              ),
             ],
           ),
         ),

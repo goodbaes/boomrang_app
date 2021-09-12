@@ -3,9 +3,9 @@ part of 'app_theme.dart';
 ThemeData _lightTheme() {
   final baseTheme = AppTheme._baseTheme;
   return baseTheme.copyWith(
-    accentColor: AppColors.lightGreenButton,
+    accentColor: AppColors.lightGreen,
     brightness: Brightness.light,
-    focusColor: Colors.greenAccent,
+    focusColor: Colors.lightGreen,
     scaffoldBackgroundColor: Colors.white,
     textTheme: baseTheme.textTheme.apply(
       displayColor: Colors.black,
@@ -25,7 +25,7 @@ ThemeData _lightTheme() {
     dividerColor: AppColors.lightGrayIcon,
     iconTheme: IconThemeData(color: AppColors.lightGrayIcon),
     shadowColor: Colors.black,
-    primaryColor: AppColors.lightGrayIcon,
+    primaryColor: AppColors.lightGreen,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       showUnselectedLabels: false,
       showSelectedLabels: false,
@@ -41,12 +41,12 @@ ThemeData _lightTheme() {
       backgroundColor: Colors.white,
     ),
     hintColor: Colors.black26,
-    buttonColor: AppColors.lightGreenButton,
+    buttonColor: AppColors.lightGreen,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: baseTheme.elevatedButtonTheme.style?.copyWith(
         backgroundColor: _elevatedButtonBackgroundColor(
-          other: AppColors.lightGreenButton,
-          pressed: AppColors.lightGreenButtonDisable,
+          other: AppColors.lightGreen,
+          pressed: AppColors.lightGreen2,
         ),
       ),
     ),

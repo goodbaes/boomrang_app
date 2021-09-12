@@ -14,15 +14,25 @@ class AppTheme {
   AppTheme._();
 
   static ThemeData get _baseTheme => ThemeData(
-        elevatedButtonTheme: _elevatedButtonThemeData,
-        textTheme: _textTheme,
-      );
+    elevatedButtonTheme: _elevatedButtonThemeData,
+    textTheme: _textTheme,
+  );
 
   static ThemeData get darkTheme => _darkTheme();
 
   static ThemeData get lightTheme => _lightTheme();
 
   static TextTheme get _textTheme => TextTheme(
+        headline1: TextStyle(
+          fontSize: 36,
+          fontWeight: FontWeight.w700,
+          height: 1,
+        ),
+        headline2: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.w500,
+          height: 1,
+        ),
         headline3: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w700,
@@ -43,5 +53,10 @@ class AppTheme {
           fontWeight: FontWeight.normal,
           height: 1,
         ),
+        subtitle1: TextStyle(
+          fontSize: 13,
+          fontWeight: FontWeight.w300,
+          height: 1,
+        )
       );
 }

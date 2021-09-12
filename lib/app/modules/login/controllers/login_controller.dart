@@ -12,10 +12,23 @@ class LoginController extends GetxController {
   }
 
   void enterCode() {
-    if (codeReady.value) Get.offAndToNamed(Routes.HOME);
+    if (codeReady.value){
+      Get.changeThemeMode(ThemeMode.light);
+      Get.offAndToNamed(Routes.HOME);
+    }
   }
 
   void sendAgain() {
     isCode.toggle();
+  }
+
+  @override
+  void onReady() {
+    // TODO: implement onReady
+    super.onReady();
+    phoneTextEditController.value = TextEditingValue(text: '+996 ');
+    if(!Get.isDarkMode){
+      Get.changeThemeMode(ThemeMode.dark);
+    }
   }
 }

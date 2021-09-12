@@ -16,7 +16,7 @@ ElevatedButtonThemeData get _elevatedButtonThemeData => ElevatedButtonThemeData(
           const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
-            color: Colors.white,
+            color: AppColors.blackText,
           ),
         ),
         backgroundColor: _elevatedButtonBackgroundColor(),
@@ -31,12 +31,11 @@ MaterialStateProperty<Color> _elevatedButtonBackgroundColor({
   return MaterialStateProperty.resolveWith(
     (states) {
       if (states.contains(MaterialState.pressed)) {
-        return pressed ?? AppColors.orangeButtonPressed;
+        return pressed ?? AppColors.lightGreen;
       } else if (states.contains(MaterialState.disabled)) {
-        return disabled ?? AppColors.mainBlue;
-      } else {
-        return other ?? AppColors.mainBlue;
+        return disabled ?? AppColors.lightGreen2;
       }
+      return AppColors.lightGreen;
     },
   );
 }

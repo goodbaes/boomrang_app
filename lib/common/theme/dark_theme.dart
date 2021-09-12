@@ -3,11 +3,14 @@ part of 'app_theme.dart';
 ThemeData _darkTheme() {
   final baseTheme = AppTheme._baseTheme;
   return baseTheme.copyWith(
+    accentColor: AppColors.lightGreen,
     brightness: Brightness.dark,
     scaffoldBackgroundColor: AppColors.scaffoldDarkTheme,
+    focusColor: Colors.white,
     textTheme: baseTheme.textTheme.apply(
       displayColor: Colors.white,
       bodyColor: Colors.white,
+      decorationColor: Colors.white,
     ),
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: Colors.white,
@@ -36,13 +39,6 @@ ThemeData _darkTheme() {
       backgroundColor: AppColors.scaffoldDarkTheme,
     ),
     hintColor: Colors.white54,
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: baseTheme.elevatedButtonTheme.style?.copyWith(
-        shadowColor: MaterialStateProperty.all(Colors.white),
-        backgroundColor: _elevatedButtonBackgroundColor(
-          pressed: AppColors.yellowButtonPressed,
-        ),
-      ),
-    ),
+    elevatedButtonTheme: _elevatedButtonThemeData,
   );
 }

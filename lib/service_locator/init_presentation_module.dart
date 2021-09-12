@@ -5,4 +5,8 @@ Future _initPresentationModule() async {
     ..lazyPut(
       () => AppPageController(),
     );
+  Get
+    ..lazyPut(
+      () => FavoritesController(),
+    );
 }

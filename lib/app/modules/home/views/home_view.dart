@@ -48,10 +48,9 @@ class HomeView extends GetView<HomeController> {
           SliverAppBar(
             floating: true,
             pinned: false,
-            flexibleSpace: FlexibleSpaceBar(
-              centerTitle: true,
-              title: Container(
-                  alignment: Alignment.centerLeft, child: _buildTitle()),
+            flexibleSpace: Container(
+              alignment: Alignment.centerLeft,
+              child: _buildTitle()
             ),
           ),
         ];
@@ -67,10 +66,12 @@ class HomeView extends GetView<HomeController> {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: ListView.builder(
-          itemCount: controller.cafeList.length,
+          itemCount: controller.resList.length,
           itemBuilder: (context, index) {
             return CafeCardWidget(
-                controller.cafeList[index], () => controller.goToDetail(index));
+              data: controller.resList[index], 
+              onTap: () => controller.goToDetail(index),
+            );
           },
         ),
       ),
@@ -82,7 +83,7 @@ class HomeView extends GetView<HomeController> {
       padding: const EdgeInsets.all(8.0),
       child: Text(
         'Рестораны',
-        style: Get.theme.textTheme.headline3,
+        style: Get.theme.textTheme.headline1
       ),
     );
   }
@@ -116,7 +117,8 @@ class HomeView extends GetView<HomeController> {
           color: controller.tabIndex.value == index
               ? Get.theme.accentColor
               : Color(0xFFF2F2F2),
-          onPressed: () => controller.tabIndex.value = index,
+          // onPressed: () => controller.tabIndex.value = index,
+          onPressed: () => controller.fetchRestaurants(),
           child: Container(
               alignment: Alignment.center,
               height: 40,
