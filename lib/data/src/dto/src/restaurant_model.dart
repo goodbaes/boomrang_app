@@ -42,9 +42,9 @@ class RestaurantModel {
     preview = json['preview'],
     // restaurantCategories = [],
     // foods = [];
-    restaurantCategories = json['restaurant_categories'].map((e) => ResCatsModel.fromResponse(e)).toList<ResCatsModel>(),
-    foods = (json['foods'] as List<Map<String, dynamic>>)
-      .map((e) => FoodModel.fromResponse(e)).toList();
+    restaurantCategories = json['restaurant_categories'].map((e) => ResCatsModel.fromResponse(e)).toList().cast<ResCatsModel>(),
+    foods = json['foods']
+      .map((e) => FoodModel.fromResponse(e)).toList().cast<FoodModel>();
 
   Map<String, dynamic> toJson() => {
     'id': id,
@@ -132,10 +132,10 @@ class FoodModel{
     description = json['description'],
     ingredients = json['ingredients'],
     portion = json['portion'],
-    price = json['price'],
+    price = double.parse(json['price']),
     restaurant = json['restaurant'],
     foodCategory = json['food_category'],
-    image = (json['image'] as List<Map<String, dynamic>>).map((e) => FoodImage.fromResponse(e)).toList();
+    image = json['image'].map((e) => FoodImage.fromResponse(e)).toList().cast<FoodImage>();
 
   Map<String, dynamic> toJson() => {
     'id': id,
@@ -155,10 +155,10 @@ class FoodModel{
     description = json['description'],
     ingredients = json['ingredients'],
     portion = json['portion'],
-    price = json['price'],
+    price = json['price'] ? num.parse(json['price']).toDouble() : 0,
     restaurant = json['restaurant'],
     foodCategory = json['food_category'],
-    image = (json['image'] as List<Map<String, dynamic>>).map((e) => FoodImage.fromJson(e)).toList();
+    image = json['image'].map((e) => FoodImage.fromJson(e)).toList().cast<FoodImage>();
 }
 
 class FoodImage{
