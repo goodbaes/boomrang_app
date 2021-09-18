@@ -7,10 +7,6 @@ import 'package:flutter/material.dart';
 import 'service_locator/init_modules.dart';
 
 void main() async {
-  // if (kDebugMode) {
-  //   //from Charles
-  //   HttpOverrides.global = CharlesProxy();
-  // }
   WidgetsFlutterBinding.ensureInitialized();
   await initModules();
   runApp(AppPageView());
