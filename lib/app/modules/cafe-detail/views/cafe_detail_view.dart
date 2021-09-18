@@ -31,7 +31,7 @@ class CafeDetailView extends GetView<CafeDetailController> {
           Center(
             child: NotificationListener(
               onNotification: (ScrollNotification n) {
-                print(n);
+                print(n.metrics.atEdge);
                 return true;
               },
               child: CustomScrollView(
