@@ -1,14 +1,15 @@
+import 'package:boomerang/utils/assets/assets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class CustomCachedNetworkImage extends StatefulWidget {
   final String url;
   const CustomCachedNetworkImage({Key? key, required this.url})
-      : super(key: key);
+    : super(key: key);
 
   @override
   _CustomCachedNetworkImageState createState() =>
-      _CustomCachedNetworkImageState();
+    _CustomCachedNetworkImageState();
 }
 
 class _CustomCachedNetworkImageState extends State<CustomCachedNetworkImage> {
@@ -17,7 +18,7 @@ class _CustomCachedNetworkImageState extends State<CustomCachedNetworkImage> {
     return CachedNetworkImage(
       imageUrl: widget.url,
       fit: BoxFit.cover,
-      placeholder: (context, url) => CircularProgressIndicator(),
+      placeholder: (context, url) => AppAssetImage.imagePng('placeholder').image(fit: BoxFit.cover),
       errorWidget: (context, url, error) => Icon(Icons.error),
     );
   }

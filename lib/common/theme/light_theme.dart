@@ -10,6 +10,7 @@ ThemeData _lightTheme() {
     textTheme: baseTheme.textTheme.apply(
       displayColor: Colors.black,
       bodyColor: Colors.black,
+      decorationColor: Colors.black,
     ),
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: Colors.black,

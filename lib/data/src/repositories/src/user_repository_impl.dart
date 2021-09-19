@@ -1,6 +1,6 @@
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:boomerang/domain/domain.dart';
-import 'package:boomerang/utils/constants.dart';
+// import 'package:boomerang/utils/constants.dart';
 
 import '../../../data.dart';
 

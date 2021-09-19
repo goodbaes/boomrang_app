@@ -76,6 +76,11 @@ class RestaurantModel {
       .map((e) => ResCatsModel.fromJson(e)).toList(),
     foods = (json['foods'] as List<Map<String, dynamic>>)
       .map((e) => FoodModel.fromJson(e)).toList();
+    
+  @override
+  String toString() {
+    return 'Restaurant#${this.id}:${this.name}';
+  }
 }
 
 class ResCatsModel{
@@ -99,7 +104,11 @@ class ResCatsModel{
   ResCatsModel.fromJson(Map<String, dynamic> json):
     id = json['id'],
     name = json['name'];
-
+  
+  @override
+  String toString() {
+    return 'ResCat#${this.id}:${this.name}';
+  }
 }
 
 class FoodModel{

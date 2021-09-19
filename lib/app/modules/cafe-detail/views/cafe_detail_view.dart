@@ -1,5 +1,6 @@
 import 'package:boomerang/common/custiom_widgets/custom_widgets.dart';
 import 'package:boomerang/common/theme/app_colors.dart';
+import 'package:boomerang/data/src/dto/src/restaurant_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -7,40 +8,39 @@ import 'package:get/get.dart';
 import '../controllers/cafe_detail_controller.dart';
 
 class CafeDetailView extends GetView<CafeDetailController> {
-  get data => controller.data;
+  RestaurantModel get data => controller.data;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              _buildTopContent(),
-              Column(
-                children: [
-                  Flexible(
-                    fit: FlexFit.tight,
-                    child: SizedBox(child: Text('asd')),
-                    flex: 37,
-                  ),
-                  Flexible(
-                      flex: 63,
-                      child: Stack(
-                        fit: StackFit.expand,
-                        children: [
-                          Material(
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16.0),
-                            ),
+      body: Center(
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            _buildTopContent(),
+            Column(
+              children: [
+                Flexible(
+                  fit: FlexFit.tight,
+                  child: SizedBox(child: Text('asd')),
+                  flex: 37,
+                ),
+                Flexible(
+                    flex: 63,
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        Material(
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16.0),
                           ),
-                        ],
-                      ))
-                ],
-              ),
-            ],
-          ),
+                        ),
+                      ],
+                    ))
+              ],
+            ),
+          ],
         ),
       ),
     );
@@ -54,11 +54,17 @@ class CafeDetailView extends GetView<CafeDetailController> {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              CustomCachedNetworkImage(
-                url: controller.data.img ?? '',
+              ColorFiltered(
+                colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.2), BlendMode.darken),
+                child: Hero(
+                  tag: "Res#${data.id}.preview",
+                  child: CustomCachedNetworkImage(
+                    url: controller.data.preview,
+                  )
+                ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.fromLTRB(8.0, 48, 8.0, 8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -100,30 +106,24 @@ class CafeDetailView extends GetView<CafeDetailController> {
     );
   }
 
-  Container _buildCorners() {
-    return Container(
-      height: 20,
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: const Radius.circular(20.0),
-            topRight: const Radius.circular(20.0),
-          )),
-    );
-  }
-
-  Text _buildName() => Text(data.name, style: Get.theme.textTheme.headline4);
+  Widget _buildName() => Hero(
+    tag: "Res#${data.id}.title", 
+    child: Text(
+      data.name, 
+      style: Get.theme.textTheme.headline1?.copyWith(color: Colors.white)
+    )
+  );
 
   Widget _buildChips() => Row(
         children: [
           _buildChipWithIcon(
               Icon(Icons.car_repair, color: Get.theme.accentColor),
-              data.deliveryTime.toString() + ' мин.'),
+              '60 мин.'),
           _buildChipWithIcon(Icon(Icons.star, color: AppColors.secondaryYellow),
               (data.rating == 0 ? 'N/R' : data.rating).toString()),
           _buildChipWithIcon(
               Icon(Icons.track_changes, color: AppColors.secondaryBlack),
-              data.km.toString() + ' km.'),
+              '3 km.'),
         ],
       );
 

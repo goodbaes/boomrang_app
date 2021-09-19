@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 class FavoritesController extends GetxController {
 
-  final favorites = Set<int>().obs;
+  final favorites = RxSet<int>();
 
   void addFavorite(int id){
     favorites.add(id);

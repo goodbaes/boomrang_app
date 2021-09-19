@@ -1,7 +1,8 @@
-import 'package:boomerang/app/routes/app_pages.dart';
 import 'package:boomerang/common/custiom_widgets/custom_widgets.dart';
 import 'package:boomerang/common/custiom_widgets/src/add_address_sheet.dart';
 import 'package:boomerang/common/custiom_widgets/src/cafe_card_widget.dart';
+import 'package:boomerang/common/custiom_widgets/src/naviagtion_drawer.dart';
+import 'package:boomerang/data/src/dto/src/restaurant_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -12,12 +13,13 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: NavigationDrawer(),
       appBar: _buildAppbar(),
       body: _buildNested(
         Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [_buildListViewHeader(), _buildListCafeCard()],
+            children: [_buildResCatsContainer(), _buildResList()],
           ),
         ),
       ),
@@ -26,16 +28,13 @@ class HomeView extends GetView<HomeController> {
 
   AppBar _buildAppbar() {
     return AppBar(
-      leading: IconButton(onPressed: () {}, icon: Icon(Icons.menu_rounded)),
       actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search_rounded))],
-      title: SizedBox(
-        child: CurrentAddressButton(
-          icon: Icons.gps_fixed,
-          text: 'Введите ваш адрес',
-          onTap: () {
-            bottomSheet(AddAddressWidget([]));
-          },
-        ),
+      title: CurrentAddressButton(
+        icon: Icons.gps_fixed,
+        text: 'Введите ваш адрес',
+        onTap: () {
+          bottomSheet(AddAddressWidget([]));
+        },
       ),
       centerTitle: true,
     );
@@ -46,6 +45,7 @@ class HomeView extends GetView<HomeController> {
       headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
         return <Widget>[
           SliverAppBar(
+            automaticallyImplyLeading: false, //? Disable Drawer Button in the sliver app
             floating: true,
             pinned: false,
             flexibleSpace: Container(
@@ -61,18 +61,23 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  Widget _buildListCafeCard() {
+  Widget _buildResList() {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: ListView.builder(
-          itemCount: controller.resList.length,
-          itemBuilder: (context, index) {
-            return CafeCardWidget(
-              data: controller.resList[index], 
-              onTap: () => controller.goToDetail(index),
-            );
-          },
+        child: RefreshIndicator(
+          onRefresh: controller.refreshData,
+          child: Obx(()=>
+            ListView.builder(
+              itemCount: controller.filteredResList.length,
+              itemBuilder: (context, index) {
+                return CafeCardWidget(
+                  data: controller.filteredResList[index], 
+                  onTap: () => controller.goToDetail(controller.filteredResList[index]),
+                );
+              },
+            )
+          )
         ),
       ),
     );
@@ -88,44 +93,43 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  Widget _buildListViewHeader() {
+  Widget _buildResCatsContainer() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Container(
         height: 40,
-        child: ListView.builder(
-          itemCount: controller.shopList.length,
-          controller: controller.headerScrollController,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) => buildPaddingHeaderCard(index),
+        child: Obx(() => 
+          ListView.builder(
+            itemCount: controller.resCatsList.length,
+            controller: controller.headerScrollController,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) => _resCatsButton(controller.resCatsList[index]),
+          ),
         ),
       ),
     );
   }
 
-  Widget buildPaddingHeaderCard(int index) {
-    return Obx(
-      () => Padding(
-        padding: EdgeInsets.symmetric(horizontal: 5),
-        child: MaterialButton(
+  Widget _resCatsButton(ResCatsModel item) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 5),
+      child: Obx(()=> 
+        MaterialButton(
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
           height: 40,
           minWidth: 0,
-          color: controller.tabIndex.value == index
-              ? Get.theme.accentColor
-              : Color(0xFFF2F2F2),
-          // onPressed: () => controller.tabIndex.value = index,
-          onPressed: () => controller.fetchRestaurants(),
+          color: controller.selectedResCatId.value == item.id
+            ? Get.theme.accentColor
+            : Color(0xFFF2F2F2),
+          onPressed: () => controller.selectedResCat = item,
           child: Container(
-              alignment: Alignment.center,
-              height: 40,
-              child: index == 0
-                  ? Icon(Icons.favorite_border_outlined)
-                  : Text("${controller.shopList[index]} $index")),
-        ),
+            alignment: Alignment.center,
+            height: 40,
+            child: Text(item.name)),
+        )
       ),
     );
   }

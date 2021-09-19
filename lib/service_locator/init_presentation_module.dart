@@ -4,8 +4,10 @@ Future _initPresentationModule() async {
   Get
     ..lazyPut(
       () => AppPageController(),
-    );
-  Get
+    )
+    ..lazyPut(
+      () => LoginController(),
+    )
     ..lazyPut(
       () => FavoritesController(),
     );

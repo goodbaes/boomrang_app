@@ -28,6 +28,7 @@ class AppPages {
       name: _Paths.HOME,
       page: () => HomeView(),
       binding: HomeBinding(),
+      transition: Transition.fadeIn,
     ),
     GetPage(
       name: _Paths.LOGIN,
@@ -38,6 +39,7 @@ class AppPages {
       name: _Paths.CAFE_DETAIL,
       page: () => CafeDetailView(),
       binding: CafeDetailBinding(),
+      transition: Transition.fadeIn,
     ),
     GetPage(
       name: _Paths.FAVORITES,

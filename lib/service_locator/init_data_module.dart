@@ -24,7 +24,10 @@ Future _initRemote() async {
 }
 
 Future _initMappers() async {
-  Get..put(ImageMapper())..put(UserMapper(Get.find()))..put(PageMapper());
+  Get
+    ..put(ImageMapper())
+    ..put(UserMapper(Get.find()))
+    ..put(PageMapper());
 }
 
 Future _initRepositories() async {

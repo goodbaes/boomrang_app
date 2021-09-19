@@ -1,6 +1,6 @@
 import 'package:boomerang/app/modules/favorites/controllers/favorites_controller.dart';
 import 'package:boomerang/common/theme/app_colors.dart';
-import 'package:boomerang/data/src/dto/src/cafe_model.dart';
+// import 'package:boomerang/data/src/dto/src/cafe_model.dart';
 import 'package:boomerang/data/src/dto/src/restaurant_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,7 +15,9 @@ class CafeCardWidget extends StatelessWidget {
   final RestaurantModel data;
   final Callback onTap;
 
-  const CafeCardWidget(
+  final FavoritesController favController = Get.find();
+
+  CafeCardWidget(
     {
       required this.onTap,
       required this.data,
@@ -62,9 +64,12 @@ class CafeCardWidget extends StatelessWidget {
   Widget _buildName(){
     return Container(
       margin: EdgeInsets.fromLTRB(0, 8, 0, 5),
-      child: Text(
-        data.name, 
-        style: Get.theme.textTheme.headline2
+      child: Hero(
+        tag: "Res#${data.id}.title",
+        child: Text(
+          data.name, 
+          style: Get.theme.textTheme.headline2
+        )
       )
     );
   }
@@ -79,14 +84,17 @@ class CafeCardWidget extends StatelessWidget {
             width: Get.width,
             child: ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(8.0)),
-              child: CustomCachedNetworkImage(
-                url: data.preview,
+              child: Hero(
+                tag: "Res#${data.id}.preview",
+                child: CustomCachedNetworkImage(
+                  url: data.preview,
+                )
               )
             )
           ),
           Positioned(
-            top: 10,
-            right: 10,
+            top: 10.0,
+            right: 10.0,
             child: _favorButton(),
           )
         ],
@@ -95,23 +103,19 @@ class CafeCardWidget extends StatelessWidget {
   }
 
   Widget _favorButton() {
-    return GetBuilder<FavoritesController>(
-      builder: (favoritesController) {
-        return ElevatedButton(
-          onPressed: () => favoritesController.toggleFavorite(data.id),
-          child: Obx(()=>
-            favoritesController.favorites.contains(data.id)
-              ? Icon(Icons.favorite, color: Colors.red)
-              : Icon(Icons.favorite_border_rounded, color: Colors.white),
-          ),
-          style: ElevatedButton.styleFrom(
-            shape: CircleBorder(),
-            padding: EdgeInsets.all(20),
-            primary: Colors.transparent,
-            onPrimary: Colors.red,
-          ),
-        );
-      },
+    return ElevatedButton(
+      onPressed: () => favController.toggleFavorite(data.id),
+      child: Obx(()=>
+        favController.favorites.contains(data.id)
+          ? Icon(Icons.favorite, color: Colors.red)
+          : Icon(Icons.favorite_border_rounded, color: Colors.white),
+      ),
+      style: ElevatedButton.styleFrom(
+        shape: CircleBorder(),
+        padding: EdgeInsets.all(20),
+        primary: Colors.transparent,
+        onPrimary: Colors.red,
+      ),
     );
   }
 }

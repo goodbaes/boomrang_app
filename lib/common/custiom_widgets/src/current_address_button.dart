@@ -27,7 +27,6 @@ class CurrentAddressButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var style = Theme.of(context).elevatedButtonTheme.style;
 
     final button = Container(
       constraints: BoxConstraints(minWidth: expand ? double.infinity : 0),

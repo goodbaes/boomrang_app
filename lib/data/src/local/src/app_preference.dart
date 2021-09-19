@@ -7,10 +7,32 @@ const _tokenKey = 'token';
 const _userPhone = 'user_phone';
 const _userPassword = 'user_password';
 
+
+const _accessTokenKey = 'access_token';
+const _refreshTokenKey = 'refresh_token';
+
 class AppPreference extends GetxService {
   final GetStorage _storage;
 
   AppPreference(this._storage);
+
+  late RxString refreshTokenRx = ''.obs;
+  late RxString accessTokenRx = ''.obs;
+
+  String get accessToken => _storage.read(_accessTokenKey) ?? '';
+  String get refreshToken => _storage.read(_refreshTokenKey) ?? '';
+
+  void updateTokens({
+    String? access,
+    String? refresh,
+  }){
+    if(access != null){
+      _storage.write(_accessTokenKey, access);
+    }
+    if(refresh != null){
+      _storage.write(_refreshTokenKey, refresh);
+    }
+  }
 
   ThemeMode get themeMode =>
       ThemeMode.values[_storage.read(_themeModeKey) ?? ThemeMode.system.index];

@@ -1,7 +1,6 @@
 import 'package:boomerang/app/routes/app_pages.dart';
 import 'package:boomerang/common/localization/app_strings.dart';
 import 'package:boomerang/common/theme/app_theme.dart';
-import 'package:boomerang/generated/locales.g.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
