@@ -7,9 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 // import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 
-
-class NavigationDrawer extends StatelessWidget{
-
+class NavigationDrawer extends StatelessWidget {
   final padding = EdgeInsets.symmetric(horizontal: 20.0);
   final LoginController loginController = Get.find();
 
@@ -17,20 +15,19 @@ class NavigationDrawer extends StatelessWidget{
   Widget build(BuildContext context) {
     return Drawer(
       child: Material(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          // mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            const SizedBox(height: 48),
-            _buildLogo(),
-            _buildMenuItems(),
-          ],
-        )
-      ),
+          child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        // mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          const SizedBox(height: 48),
+          _buildLogo(),
+          _buildMenuItems(),
+        ],
+      )),
     );
   }
 
-  Widget _buildLogo(){
+  Widget _buildLogo() {
     return Column(
       children: [
         Row(
@@ -41,59 +38,64 @@ class NavigationDrawer extends StatelessWidget{
           ],
         ),
         const SizedBox(height: 18),
-        Divider(color: Colors.black38,),
+        Divider(
+          color: Colors.black38,
+        ),
       ],
     );
   }
 
-  Widget _buildMenuItems(){
+  Widget _buildMenuItems() {
     return Expanded(
-      child: ListView(
-        padding: padding,
-        children: <Widget>[
-          _menuItem(
-            text: 'Главная',
-            icon: Icons.home_outlined,
-            onClick: (){
-              Get.toNamed(Routes.HOME);
-            },
-          ),
-          _menuItem(
-            text: 'Мой профиль',
-            icon: Icons.person_outline,
-            onClick: (){},
-          ),
-          _menuItem(
-            text: 'История заказов',
-            icon: Icons.shopping_cart_outlined,
-            onClick: (){},
-          ),
-          _menuItem(
-            text: 'Мои адреса',
-            icon: Icons.map_outlined,
-            onClick: (){},
-          ),
-          _menuItem(
-            text: 'Помощь',
-            icon: Icons.question_answer_outlined,
-            onClick: (){},
-          ),
-          _menuItem(
-            text: 'Настройки',
-            icon: Icons.settings_outlined,
-            onClick: (){},
-          ),
-          _menuItem(
-            text: 'Выйти из аккаунта',
-            icon: Icons.logout_outlined,
-            onClick: (){
-              loginController.logout();
-            },
-            color: AppColors.red,
-          ),
-        ],
-      )
-    );
+        child: ListView(
+      padding: padding,
+      children: <Widget>[
+        _menuItem(
+          text: 'Главная',
+          icon: Icons.home_outlined,
+          onClick: () {
+            Get.toNamed(Routes.HOME);
+          },
+        ),
+        _menuItem(
+          text: 'Мой профиль',
+          icon: Icons.person_outline,
+          onClick: () {
+            Get.toNamed(Routes.PROFILE);
+          },
+        ),
+        _menuItem(
+          text: 'История заказов',
+          icon: Icons.shopping_cart_outlined,
+          onClick: () {
+            Get.toNamed(Routes.ORDER_HISTORY);
+          },
+        ),
+        _menuItem(
+          text: 'Мои адреса',
+          icon: Icons.map_outlined,
+          onClick: () {},
+        ),
+        _menuItem(
+          text: 'Помощь',
+          icon: Icons.question_answer_outlined,
+          onClick: () {},
+        ),
+        _menuItem(
+          text: 'Настройки',
+          icon: Icons.settings_outlined,
+          onClick: () {},
+        ),
+        _menuItem(
+          text: 'Выйти из аккаунта',
+          icon: Icons.logout_outlined,
+          onClick: () {
+            loginController.logout();
+          },
+          color: AppColors.red,
+        ),
+      ],
+    ));
   }
 
   Widget _menuItem({
@@ -101,7 +103,7 @@ class NavigationDrawer extends StatelessWidget{
     required VoidCallback onClick,
     IconData? icon,
     Color? color,
-  }){
+  }) {
     // final color = Colors.white;
     final hoverColor = AppColors.lightGreen;
     return ListTile(
